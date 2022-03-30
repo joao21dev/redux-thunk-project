@@ -7,13 +7,21 @@ export class Info extends React.Component {
     this.props.loadData();
   }
   render() {
-    return <span>Info</span>;
+    if (this.props.isFetching) {
+      return <span>Loading...</span>;
+    }
+    if (this.props.error) {
+      return <span>Error</span>;
+    }
+    return <span>Info: {this.props.data.origin}</span>;
   }
 }
 
 const mapStateToProps = (state) => {
   return {
     isFetching: state.isFetching,
+    data: state.data,
+    error: state.error,
   };
 };
 
